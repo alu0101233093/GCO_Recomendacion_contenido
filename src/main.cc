@@ -14,7 +14,7 @@ void Ayuda(){
     std::cout << "estval -i input.txt -o output.txt\n\n";
 }
 
-void menu(Valoraciones *v){
+void menu(Valoraciones *v){/*
     int opcion = 1;
     int opcion2 = 1;
 
@@ -42,11 +42,10 @@ void menu(Valoraciones *v){
                 std::cout << "Por favor introduzca un numero de los indicados en el menu \n";
                 break;
         }
-    } while (opcion > 3 || opcion < 1);
+    } while (opcion > 3 || opcion < 1);*/
 }
 
 int main (int argc, char *argv[]) {
-    int n_items, n_person, val;
 
     // Lectura y carga de datos
     if (argc == 5){
@@ -56,16 +55,13 @@ int main (int argc, char *argv[]) {
             std::cout << "No se pudo abrir el fichero\n";
         else{
             std::cout << "Fichero abierto correctamente\n\n";
-            fentrada >> n_person;
-            fentrada >> n_items;
-            Valoraciones V(n_person, n_items);
-            for (int i = 0; i < n_person; i++){
-                for (int j = 0; j < n_items; j++){
-                    fentrada >> val;
-                    V.set_persona_item_valor(i,j,val);
-                }
-            }
-            menu(&V);
+            std::string documento;
+            Valoraciones V;
+            while (!fentrada.eof()) {
+                std::getline(fentrada, documento);
+                V.set_documento(documento);
+            }            
+                menu(&V);
         }
     } else
         Ayuda();

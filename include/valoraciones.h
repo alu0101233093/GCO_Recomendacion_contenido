@@ -14,7 +14,7 @@ class Valoraciones {
         Valoraciones();
         ~Valoraciones();
         void set_documento(std::string);
-        void TF(int,int);
-        void IDF(int);
+        int TF(std::string,int);
+        float IDF(std::string);
         void TFIDF(int,int);
 };

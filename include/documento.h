@@ -14,5 +14,5 @@ class Documento {
 
         // getters
         std::string get_word(int); // getter de palabra
-        int get_frec(int); // getter frecuencia
+        int get_frec(std::string); // getter frecuencia
 };

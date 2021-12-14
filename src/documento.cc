@@ -23,3 +23,12 @@ Documento::set_word(std::string cadena){
     std::pair<std::string,int> cr(cadena,1);
     keywords_.push_back(cr);
 }
+
+int 
+Documento::get_frec(std::string cadena){
+    for(int i = 0; i < int(keywords_.size()); i++){
+        if(cadena == keywords_[i].first)
+            return keywords_[i].second;
+    }
+    return 0;
+}

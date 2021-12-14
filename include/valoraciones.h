@@ -17,4 +17,6 @@ class Valoraciones {
         int TF(std::string,int);
         float IDF(std::string);
         void TFIDF(int,int);
+        int get_n();
+        void print();
 };

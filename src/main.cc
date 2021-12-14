@@ -60,8 +60,9 @@ int main (int argc, char *argv[]) {
             while (!fentrada.eof()) {
                 std::getline(fentrada, documento);
                 V.set_documento(documento);
-            }            
-                menu(&V);
+            }
+            V.print();      
+            menu(&V);
         }
     } else
         Ayuda();

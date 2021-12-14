@@ -7,7 +7,7 @@ Universidad: ULL
 
 #include "../include/documento.h"
 
-Documento::Documento() {}
+Documento::Documento() :n_words(0) {}
 
 Documento::~Documento() {}
 
@@ -22,6 +22,7 @@ Documento::set_word(std::string cadena){
 
     std::pair<std::string,int> cr(cadena,1);
     keywords_.push_back(cr);
+    n_words++;
 }
 
 int 
@@ -32,3 +33,9 @@ Documento::get_frec(std::string cadena){
     }
     return 0;
 }
+
+std::string 
+Documento::get_word(int n){return keywords_[n].first;}
+
+int 
+Documento::get_n(){return n_words;}

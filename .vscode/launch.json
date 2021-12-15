@@ -12,7 +12,7 @@
             "program": "${workspaceFolder}/estval",
             "args": [
                 "-i",
-                "l.txt",
+                "example.txt",
                 "-o",
                 "output.txt"
               ],

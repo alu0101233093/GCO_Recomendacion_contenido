@@ -6,6 +6,7 @@ Universidad: ULL
 */
 
 #include <iomanip>
+#include <fstream>
 #include "../include/valoraciones.h"
 
 Valoraciones::Valoraciones() :valoraciones_(0), palabras_(0){
@@ -74,26 +75,32 @@ Valoraciones::TFIDF(std::string x,int y){
 int Valoraciones::get_n(){return n_docs_;}
 
 void
-Valoraciones::print(){
+Valoraciones::print(std::string nombre){
+    std::ofstream fsalida(nombre);
 
     for(int i = 0; i < n_docs_; i++){
-        std::cout << "Documento " << i << ":" << std::endl;
-        std::cout << "Índice\tTérmino\t\tTF\tIDF\tTF-IDF" << std::endl;
+        fsalida << "Documento " << i << ":" << std::endl;
+        fsalida << "Índice\tTérmino\t\t\tTF\t\tIDF\t\tTF-IDF" << std::endl;
         for(int j = 0; j < n_palabras_; j++){
             std::string palabra = palabras_[j];
-            std::cout << j << "\t";
-            std::cout << palabra;
+            fsalida << j << "\t\t";
+            fsalida << palabra;
             // inicio alineación de la tabla
-            if(palabras_[j].size() >= 8)
-                std::cout << "\t";
+            if(palabra.size() >= 8)
+                fsalida << "\t\t";
+            else if(palabra.size() >= 12)
+                fsalida << "";
+            else if(palabra.size() <= 3)
+                fsalida << "\t\t\t\t";
             else
-                std::cout << "\t\t";
+                fsalida << "\t\t\t";
             // fin alineación de la tabla
-            std::cout << TF(palabra,i) << "\t";
-            std::cout << std::fixed << std::setprecision(5) << IDF(palabra) << "\t";
-            std::cout << std::fixed << std::setprecision(5) << TFIDF(palabra,i) << "\t";
-            std::cout << std::endl;
+            fsalida << TF(palabra,i) << "\t\t";
+            fsalida << std::fixed << std::setprecision(5) << IDF(palabra) << "\t";
+            fsalida << std::fixed << std::setprecision(5) << TFIDF(palabra,i) << "\t";
+            fsalida << std::endl;
         }
-        std::cout << std::endl << std::endl;
+        fsalida << std::endl << std::endl;
     }
+    fsalida.close();
 }

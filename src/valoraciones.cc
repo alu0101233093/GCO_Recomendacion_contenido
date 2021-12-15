@@ -78,50 +78,22 @@ Valoraciones::print(){
 
     for(int i = 0; i < n_docs_; i++){
         std::cout << "Documento " << i << ":" << std::endl;
-        std::cout << "Índice\tTérmino\tTF\tIDF\tTF-IDF" << std::endl;
-        for(int j = 0; j < int(valoraciones_[i].get_n()); j++){
-            std::string palabra = valoraciones_[i].get_word(j);
+        std::cout << "Índice\tTérmino\t\tTF\tIDF\tTF-IDF" << std::endl;
+        for(int j = 0; j < n_palabras_; j++){
+            std::string palabra = palabras_[j];
             std::cout << j << "\t";
-            std::cout << palabra << "\t";
+            std::cout << palabra;
+            // inicio alineación de la tabla
+            if(palabras_[j].size() >= 8)
+                std::cout << "\t";
+            else
+                std::cout << "\t\t";
+            // fin alineación de la tabla
             std::cout << TF(palabra,i) << "\t";
             std::cout << std::fixed << std::setprecision(5) << IDF(palabra) << "\t";
-            std::cout << std::fixed << std::setprecision(5) << TFIDF(palabra,j) << "\t";
+            std::cout << std::fixed << std::setprecision(5) << TFIDF(palabra,i) << "\t";
             std::cout << std::endl;
         }
         std::cout << std::endl << std::endl;
     }
-
-    /*std::cout << "TF\t";
-    for(int i = 0; i < n_docs_; i++)
-        std::cout << "\tDocumento " << i;
-    std::cout << std::endl;
-    for(int i = 0; i < n_palabras_; i++){
-        std::cout << palabras_[i];
-        if(palabras_[i].size() >= 8)
-            std::cout << "\t";
-        else
-            std::cout << "\t\t";
-        for(int j = 0; j < n_docs_; j++){
-            std::cout << TF(palabras_[i],j) << "\t\t";
-        }
-        std::cout << std::endl;
-    }
-
-    std::cout << std::endl << std::endl;
-
-    std::cout << "TF-IDF\t";
-    for(int i = 0; i < n_docs_; i++)
-        std::cout << "\tDocumento " << i;
-    std::cout << std::endl;
-    for(int i = 0; i < n_palabras_; i++){
-        std::cout << palabras_[i];
-        if(palabras_[i].size() >= 8)
-            std::cout << "\t";
-        else
-            std::cout << "\t\t";
-        for(int j = 0; j < n_docs_; j++){
-            std::cout << std::fixed << std::setprecision(5) << TFIDF(palabras_[i],j) << "\t\t";
-        }
-        std::cout << std::endl;
-    } */
 }

@@ -8,7 +8,10 @@
 class Valoraciones {
     private:
         std::vector<Documento> valoraciones_;
+        std::vector<std::string> palabras_;
         int n_docs_; // Número de documentos
+        int n_palabras_;
+        void set_palabra(std::string);
         
     public:
         Valoraciones();
@@ -16,7 +19,7 @@ class Valoraciones {
         void set_documento(std::string);
         int TF(std::string,int);
         float IDF(std::string);
-        void TFIDF(int,int);
+        float TFIDF(std::string,int);
         int get_n();
         void print();
 };

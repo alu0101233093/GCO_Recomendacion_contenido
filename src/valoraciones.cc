@@ -7,6 +7,7 @@ Universidad: ULL
 
 #include <iomanip>
 #include <fstream>
+#include <cctype>
 #include "../include/valoraciones.h"
 
 Valoraciones::Valoraciones() :valoraciones_(0), palabras_(0){
@@ -28,12 +29,12 @@ Valoraciones::set_documento(std::string documento){
                 palabra = "";
             }
         }else if(i == int(documento.size()-1)){
-            palabra.push_back(documento[i]);
+            palabra.push_back(tolower(documento[i]));
             aux.set_word(palabra);
             set_palabra(palabra);
             palabra = "";
         }else
-            palabra.push_back(documento[i]);
+            palabra.push_back(tolower(documento[i]));
     }
     valoraciones_.push_back(aux);
     n_docs_++;
@@ -86,12 +87,12 @@ Valoraciones::print(std::string nombre){
             fsalida << j << "\t\t";
             fsalida << palabra;
             // inicio alineación de la tabla
-            if(palabra.size() >= 8)
+            if(palabra.size() <= 3)
+                fsalida << "\t\t\t\t";
+            else if(palabra.size() >= 8 && palabra.size() < 12)
                 fsalida << "\t\t";
             else if(palabra.size() >= 12)
-                fsalida << "";
-            else if(palabra.size() <= 3)
-                fsalida << "\t\t\t\t";
+                fsalida << "\t";
             else
                 fsalida << "\t\t\t";
             // fin alineación de la tabla

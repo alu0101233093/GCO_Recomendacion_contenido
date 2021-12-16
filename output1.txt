@@ -1,0 +1,27 @@
+Documento 0:
+Índice	Término			TF		IDF		TF-IDF
+0		hola			1		0.17609	0.17609	
+1		gol				1		0.47712	0.47712	
+2		bye				1		0.00000	0.00000	
+3		hey				0		0.47712	0.00000	
+4		adiós			0		0.47712	0.00000	
+
+
+Documento 1:
+Índice	Término			TF		IDF		TF-IDF
+0		hola			1		0.17609	0.17609	
+1		gol				0		0.47712	0.00000	
+2		bye				2		0.00000	0.00000	
+3		hey				1		0.47712	0.47712	
+4		adiós			0		0.47712	0.00000	
+
+
+Documento 2:
+Índice	Término			TF		IDF		TF-IDF
+0		hola			0		0.17609	0.00000	
+1		gol				0		0.47712	0.00000	
+2		bye				1		0.00000	0.00000	
+3		hey				0		0.47712	0.00000	
+4		adiós			1		0.47712	0.47712	
+
+

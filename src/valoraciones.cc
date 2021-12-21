@@ -73,6 +73,11 @@ Valoraciones::TFIDF(std::string x,int y){
     return TF(x,y)*IDF(x);
 }
 
+float 
+Valoraciones::coseno(int x,int y){
+    
+}
+
 int Valoraciones::get_n(){return n_docs_;}
 
 void
@@ -81,22 +86,18 @@ Valoraciones::print(std::string nombre){
 
     for(int i = 0; i < n_docs_; i++){
         fsalida << "Documento " << i << ":" << std::endl;
-        fsalida << "Índice\tTérmino\t\t\tTF\t\tIDF\t\tTF-IDF" << std::endl;
+        fsalida << "Índice\tTérmino\t\t\tTF\tIDF\tTF-IDF" << std::endl;
         for(int j = 0; j < n_palabras_; j++){
             std::string palabra = palabras_[j];
-            fsalida << j << "\t\t";
+            fsalida << j << "\t";
             fsalida << palabra;
             // inicio alineación de la tabla
-            if(palabra.size() <= 3)
-                fsalida << "\t\t\t\t";
-            else if(palabra.size() >= 8 && palabra.size() < 12)
+            if(palabra.size() >= 8)
                 fsalida << "\t\t";
-            else if(palabra.size() >= 12)
-                fsalida << "\t";
             else
                 fsalida << "\t\t\t";
             // fin alineación de la tabla
-            fsalida << TF(palabra,i) << "\t\t";
+            fsalida << TF(palabra,i) << "\t";
             fsalida << std::fixed << std::setprecision(5) << IDF(palabra) << "\t";
             fsalida << std::fixed << std::setprecision(5) << TFIDF(palabra,i) << "\t";
             fsalida << std::endl;

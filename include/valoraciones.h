@@ -22,4 +22,5 @@ class Valoraciones {
         float TFIDF(std::string,int);
         int get_n();
         void print(std::string);
+        float coseno(int,int);
 };

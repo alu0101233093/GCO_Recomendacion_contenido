@@ -30,7 +30,7 @@ int main (int argc, char *argv[]) {
             if (!fentrada.is_open())
                 std::cout << "No se pudo abrir el fichero\n";
             else{
-                std::cout << "Fichero abierto correctamente\n\n";
+                std::cout << "Fichero abierto correctamente\n";
                 std::string documento;
                 Valoraciones V;
                 while (!fentrada.eof()) {

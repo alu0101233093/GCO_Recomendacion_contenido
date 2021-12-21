@@ -8,19 +8,19 @@
 class Valoraciones {
     private:
         std::vector<Documento> valoraciones_;
-        std::vector<std::string> palabras_;
+        std::vector<std::string> diccionario_;
         int n_docs_; // Número de documentos
-        int n_palabras_;
+        int n_palabras_; // Número de palabras en el diccionario
         void set_palabra(std::string);
         
     public:
         Valoraciones();
         ~Valoraciones();
         void set_documento(std::string);
-        int TF(std::string,int);
+        float TF(std::string,int);
         float IDF(std::string);
         float TFIDF(std::string,int);
         int get_n();
         void print(std::string);
-        float coseno(int,int);
+        float sim_coseno(int,int);
 };

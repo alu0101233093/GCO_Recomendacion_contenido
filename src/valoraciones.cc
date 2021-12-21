@@ -10,7 +10,7 @@ Universidad: ULL
 #include <cctype>
 #include "../include/valoraciones.h"
 
-Valoraciones::Valoraciones() :valoraciones_(0), palabras_(0){
+Valoraciones::Valoraciones() :valoraciones_(0), diccionario_(0){
     n_docs_ = 0;
     n_palabras_ = 0;
 }
@@ -44,22 +44,22 @@ void
 Valoraciones::set_palabra(std::string palabra){
     bool found = false;
     for(int i = 0; i < n_palabras_; i++)
-        if(palabras_[i] == palabra)
+        if(diccionario_[i] == palabra)
             found = true;
     
     if(!found){
-        palabras_.push_back(palabra);
+        diccionario_.push_back(palabra);
         n_palabras_++;
     }
 }
 
-int 
+float 
 Valoraciones::TF(std::string x, int y){
-    return valoraciones_[y].get_frec(x);
+    return (float(valoraciones_[y].get_frec(x))/float(valoraciones_[y].get_n()));
 }
 
 float 
-Valoraciones::IDF(std::string x){ // REVISAR
+Valoraciones::IDF(std::string x){
     float dfx = 0; // número de documentos en N en los que la palabra x aparece
     for(int i = 0; i < int(valoraciones_.size()); i++){
         if(valoraciones_[i].get_frec(x) >= 1)
@@ -74,21 +74,31 @@ Valoraciones::TFIDF(std::string x,int y){
 }
 
 float 
-Valoraciones::coseno(int x,int y){
-    
+Valoraciones::sim_coseno(int x,int y){
+    if (x == y)
+        return 1;
+
+    float suma = 0;
+    for(int i = 0; i < n_palabras_; i++){
+        suma += TFIDF(diccionario_[i],x) * TFIDF(diccionario_[i],y);
+    }
+    return suma;
 }
 
 int Valoraciones::get_n(){return n_docs_;}
 
 void
 Valoraciones::print(std::string nombre){
-    std::ofstream fsalida(nombre);
+    std::ofstream fsalida;
+    std::string output = "output/";
+    output = output + nombre;
+    fsalida.open(output,std::ios::out);
 
     for(int i = 0; i < n_docs_; i++){
         fsalida << "Documento " << i << ":" << std::endl;
         fsalida << "Índice\tTérmino\t\t\tTF\tIDF\tTF-IDF" << std::endl;
         for(int j = 0; j < n_palabras_; j++){
-            std::string palabra = palabras_[j];
+            std::string palabra = diccionario_[j];
             fsalida << j << "\t";
             fsalida << palabra;
             // inicio alineación de la tabla
@@ -97,12 +107,19 @@ Valoraciones::print(std::string nombre){
             else
                 fsalida << "\t\t\t";
             // fin alineación de la tabla
-            fsalida << TF(palabra,i) << "\t";
+            fsalida << std::fixed << std::setprecision(5) << TF(palabra,i) << "\t";
             fsalida << std::fixed << std::setprecision(5) << IDF(palabra) << "\t";
             fsalida << std::fixed << std::setprecision(5) << TFIDF(palabra,i) << "\t";
             fsalida << std::endl;
         }
         fsalida << std::endl << std::endl;
+    }
+
+    fsalida << "---------------- Similaridad coseno ----------------" << std::endl;
+    for(int i = 0; i < n_docs_; i++){
+        for(int j = i; j < n_docs_; j++){
+            fsalida << "cos(" << i << "," << j << ") = " << sim_coseno(i,j) << std::endl;
+        }
     }
     fsalida.close();
 }

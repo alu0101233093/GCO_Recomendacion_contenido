@@ -24,7 +24,9 @@ int main (int argc, char *argv[]) {
             arguments[i] = argv[i];
         if((arguments[1] == "-i" || arguments[1] == "-I") & (arguments[3] == "-o" || arguments[3] == "-O")){
             std::ifstream fentrada;
-            fentrada.open(argv[2], std::ios::in);
+            std::string input = "input/";
+            input = input + argv[2];
+            fentrada.open(input, std::ios::in);
             if (!fentrada.is_open())
                 std::cout << "No se pudo abrir el fichero\n";
             else{

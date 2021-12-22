@@ -176,7 +176,8 @@ Esta clase se encarga de almacenar distintos documentos (que son valoraciones).
 class Documento {
     private:
         std::vector<std::pair<std::string,int>> terminos_; // Almacena las palabras del documento y la frecuencia absoluta de dicha palabra
-        int n_terms:; // Número de palabras distintas en el documento
+        int n_diff_terms_;  // Número de palabras distintas en el documento
+        int n_terms:; // Número de palabras en el documento
         
     public:
         Documento(); // Constructor
@@ -184,7 +185,8 @@ class Documento {
         void set_word(std::string); // Añade una palabra al documento
 
         // Getters
-        int get_terms(); // Getter del número de términos distintos
+        int get_diff_terms(); // Getter del número de términos distintos
+        int get_terms(); // getter del número de términos
         std::string get_word(int); // Getter de palabra
         int get_frec(std::string); // Getter frecuencia absoluta
 };

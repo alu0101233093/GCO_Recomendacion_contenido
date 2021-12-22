@@ -7,7 +7,7 @@ Universidad: ULL
 
 #include "../include/documento.h"
 
-Documento::Documento() :n_terms_(0) {}
+Documento::Documento() :n_diff_terms_(0), n_terms_(0) {}
 
 Documento::~Documento() {}
 
@@ -23,6 +23,7 @@ Documento::set_word(std::string cadena){
 
     std::pair<std::string,int> cr(cadena,1);
     terminos_.push_back(cr);
+    n_diff_terms_++;
 }
 
 int 
@@ -36,6 +37,9 @@ Documento::get_frec(std::string cadena){
 
 std::string 
 Documento::get_word(int n){return terminos_[n].first;}
+
+int 
+Documento::get_diff_terms(){return n_diff_terms_;}
 
 int 
 Documento::get_terms(){return n_terms_;}

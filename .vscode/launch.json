@@ -12,9 +12,9 @@
             "program": "${workspaceFolder}/estval",
             "args": [
                 "-i",
-                "example2.txt",
+                "example.txt",
                 "-o",
-                "output2.txt"
+                "output.txt"
               ],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",

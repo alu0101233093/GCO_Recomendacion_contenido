@@ -5,8 +5,8 @@
 
 class Documento {
     private:
-        std::vector<std::pair<std::string,int>> keywords_;
-        int n_words;
+        std::vector<std::pair<std::string,int>> terminos_;
+        int n_terms_;
         
     public:
         Documento();
@@ -14,7 +14,7 @@ class Documento {
         void set_word(std::string);
 
         // getters
-        int get_n(); // getter del número de palabras
+        int get_terms(); // getter del número de términos distintos
         std::string get_word(int); // getter de palabra
         int get_frec(std::string); // getter frecuencia
 };

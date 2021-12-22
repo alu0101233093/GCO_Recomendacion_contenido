@@ -7,35 +7,35 @@ Universidad: ULL
 
 #include "../include/documento.h"
 
-Documento::Documento() :n_words(0) {}
+Documento::Documento() :n_terms_(0) {}
 
 Documento::~Documento() {}
 
 void 
 Documento::set_word(std::string cadena){
-    for(int i = 0; i < int(keywords_.size()); i++){
-        if(cadena == keywords_[i].first){
-            keywords_[i].second += 1;
+    n_terms_++;
+    for(int i = 0; i < int(terminos_.size()); i++){
+        if(cadena == terminos_[i].first){
+            terminos_[i].second += 1;
             return;
         }
     }
 
     std::pair<std::string,int> cr(cadena,1);
-    keywords_.push_back(cr);
-    n_words++;
+    terminos_.push_back(cr);
 }
 
 int 
 Documento::get_frec(std::string cadena){
-    for(int i = 0; i < int(keywords_.size()); i++){
-        if(cadena == keywords_[i].first)
-            return keywords_[i].second;
+    for(int i = 0; i < int(terminos_.size()); i++){
+        if(cadena == terminos_[i].first)
+            return terminos_[i].second;
     }
     return 0;
 }
 
 std::string 
-Documento::get_word(int n){return keywords_[n].first;}
+Documento::get_word(int n){return terminos_[n].first;}
 
 int 
-Documento::get_n(){return n_words;}
+Documento::get_terms(){return n_terms_;}

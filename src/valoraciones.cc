@@ -55,7 +55,7 @@ Valoraciones::set_palabra(std::string palabra){
 
 float 
 Valoraciones::TF(std::string x, int y){
-    return (float(valoraciones_[y].get_frec(x))/float(valoraciones_[y].get_n()));
+    return (float(valoraciones_[y].get_frec(x))/float(valoraciones_[y].get_terms()));
 }
 
 float 

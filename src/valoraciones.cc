@@ -117,11 +117,27 @@ Valoraciones::print(std::string nombre){
     }
 
     fsalida << "---------------- Similaridad coseno ----------------" << std::endl;
+    std::vector<std::pair<std::pair<int,int>,float>> c;
+    std::pair<std::pair<int,int>,float> p;
+    int count = 0;
     for(int i = 0; i < n_docs_; i++){
         for(int j = i; j < n_docs_; j++){
-            if(i != j)
-                fsalida << "cos(" << i << "," << j << ") = " << sim_coseno(i,j) << std::endl;
+            if(i != j){
+                p.first.first = i;
+                p.first.second = j;
+                p.second = sim_coseno(i,j);
+                c.push_back(p);
+                int k = count;
+                while(k > 0 && c[k].second > c[k-1].second){
+                    c[k].swap(c[k-1]);
+                    k--;
+                }
+                count++;
+            }
         }
+    }
+    for(int i = 0; i < int(c.size()); i++){
+        fsalida << "cos(" << c[i].first.first << "," << c[i].first.second << ") = " << c[i].second << std::endl;
     }
     fsalida.close();
 }
